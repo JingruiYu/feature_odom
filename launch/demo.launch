@@ -1,0 +1,22 @@
+<!--
+Example launch file: launches the feature_match_odom with testing node
+-->
+
+<launch>
+
+  <param name="use_sim_time" value="true" />
+
+  <node pkg="feature_match_odom" type="test_performance" name="test_performance"/>
+
+  <node pkg="feature_match_odom" type="prepare_images_for_labling" name="prepare_images_for_labling"/>
+
+  <node pkg="feature_match_odom" type="feature_match_odom_node"
+    name="feature_match_odom_node" output="screen">
+
+    <remap from="/freespace/scan" to="/freespace/scan" />
+    <remap from="/ackermann_odom" to="/ackermann_odom" />
+  </node>
+
+  <node pkg="rviz" name="rviz" type="rviz" args="-d $(find feature_match_odom)/rviz/feature_match_odom.rviz"/>
+
+</launch>
